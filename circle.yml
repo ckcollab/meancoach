@@ -4,7 +4,7 @@ machine:
 
 test:
   pre:
-    - pip install -r requirements/test.pip
+    - pip install -r meancoach_project/requirements/test.pip
   override:
     - flake8
     - (cd meancoach_project && py.test)
