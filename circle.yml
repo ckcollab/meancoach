@@ -12,6 +12,6 @@ dependencies:
 test:
   override:
     - (cd meancoach_project && flake8 *.py)
-    - (cd meancoach_project && PYTHONPATH=$PYTHONPATH:~/meancoach/meancoach_project/ py.test)
+    - (cd meancoach_project && PYTHONPATH=.  py.test)
     - (cd meancoach_project && echo `pwd`)
 
