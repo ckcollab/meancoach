@@ -15,4 +15,7 @@ from dj_static import Cling
 settings_module = os.environ.get('DJANGO_SETTINGS_MODULE', None)
 assert settings_module, "DJANGO_SETTINGS_MODULE environment variable not set"
 
+
+
+
 application = Cling(get_wsgi_application())
