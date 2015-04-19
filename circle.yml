@@ -11,6 +11,6 @@ dependencies:
 test:
   override:
     - (cd meancoach_project && flake8 *.py)
-    - (cd meancoach_project && py.test)
+    - (cd meancoach_project && py.test --ds=meancoach_project.settings.test)
     - echo `pwd`
 
