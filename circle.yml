@@ -1,10 +1,11 @@
 machine:
   python:
     version: 2.7.5
-#  environment:
-#    PYTHONPATH: $PYTHONPATH:.
-#    PYTHONPATH: $PYTHONPATH:$HOME/meancoach
-#    PYTHONPATH: $PYTHONPATH:$HOME/meancoach/meancoach_project
+  environment:
+    PYTHONPATH: $PYTHONPATH:.
+    PYTHONPATH: $PYTHONPATH:$HOME/meancoach
+    PYTHONPATH: $PYTHONPATH:$HOME/meancoach/meancoach_project
+    PATH: $PATH:/home/ubuntu/virtualenvs/venv-2.7.5/lib/python2.7/site-packages
 
 dependencies:
   pre:
