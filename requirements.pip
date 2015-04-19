@@ -1,1 +1,1 @@
--r meancoach/requirements/base.pip
+-r meancoach_project/requirements/base.pip
