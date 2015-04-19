@@ -1,9 +1,13 @@
+import dj_database_url
+
 from base import *
 
 
+DATABASES['default'] =  dj_database_url.config()
+
 DEBUG = False
 
-ALLOWED_HOSTS = ['.example.com']
+ALLOWED_HOSTS = ['.herokuapp.com']
 
 
 # Use the cached template loader so template is compiled once and read from
