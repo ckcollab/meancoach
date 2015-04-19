@@ -55,3 +55,12 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# IDEs
+.idea/
+
+# Settings
+meancoach/settings/local.py
+
+# Bower
+meancoach/bower_components

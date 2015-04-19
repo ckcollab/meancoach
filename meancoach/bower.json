@@ -1,0 +1,22 @@
+{
+  "name": "meancoach",
+  "version": "0.1.0",
+  "homepage": "https://github.com/dev-coop/meancoach",
+  "authors": [
+    "Eric Carmichael <eric@ckcollab.com>"
+  ],
+  "description": "Have goals? Mean coach will make you reach them!",
+  "main": "static/js/main.js, static/css/main.css",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4",
+    "gulp": "~3.8.11"
+  }
+}

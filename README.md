@@ -1,2 +1,5 @@
 # meancoach
-Have goals? Mean coach will make you reach them!
+
+`pip install -r requirements.dev.pip`
+
+`bower install`
