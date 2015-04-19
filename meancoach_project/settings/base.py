@@ -43,7 +43,7 @@ INSTALLED_APPS = (
     'pipeline',
 
     # Project apps.
-    #'meancoach.apps.',
+    'meancoach',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -77,7 +77,10 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+if DEBUG:
+    STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
+else:
+    STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -90,7 +93,6 @@ WSGI_APPLICATION = 'wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -115,6 +117,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+SECRET_KEY = '(*0&74%ihg0ui+400+@%2pe92_c)x@w2m%6s(jhs^)dc$&&g93'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/

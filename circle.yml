@@ -1,0 +1,11 @@
+machine:
+  python:
+    version: 2.7.5
+
+test:
+  pwd:
+    meancoach_project/
+  pre:
+    - pip install -r requirements/test.pip
+  override:
+    - fab test

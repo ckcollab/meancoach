@@ -60,10 +60,10 @@ target/
 .idea/
 
 # Settings
-meancoach/settings/local.py
+meancoach_project/settings/local.py
 
 # Static files
-meancoach/collected_static
+meancoach_project/collected_static
 
 # Bower
 bower_components
