@@ -18,4 +18,5 @@ test:
     - (cd meancoach_project && echo `pwd`)
     - echo $PYTHONPATH
     - echo $PATH
+    - pip freeze
 
