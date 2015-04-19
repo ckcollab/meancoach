@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -38,6 +40,7 @@ INSTALLED_APPS = (
 
     # 3rd-party apps.
     'django_extensions',
+    'pipeline',
 
     # Project apps.
     #'meancoach.apps.',
@@ -74,6 +77,14 @@ TEMPLATES = [
     },
 ]
 
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+)
+
 WSGI_APPLICATION = 'wsgi.application'
 
 
@@ -109,6 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -179,5 +191,24 @@ LOGGING = {
             'handlers': ['console', ],
             'level': 'INFO',
         }
+    }
+}
+
+PIPELINE_CSS = {
+    'libraries': {
+        'source_filenames': (
+            'bower_components/bootstrap/dist/css/bootstrap.css',
+            'css/main.css',
+        ),
+        'output_filename': 'css/libs.min.css',
+    }
+}
+PIPELINE_JS = {
+    'libraries': {
+        'source_filenames': (
+            'bower_components/jquery/dist/jquery.js',
+            'bower_components/bootstrap/dist/js/bootstrap.js',
+        ),
+        'output_filename': 'js/libs.min.js',
     }
 }

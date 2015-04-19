@@ -62,5 +62,8 @@ target/
 # Settings
 meancoach/settings/local.py
 
+# Static files
+meancoach/collected_static
+
 # Bower
-meancoach/bower_components
+bower_components
