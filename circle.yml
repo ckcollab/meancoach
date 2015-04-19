@@ -12,5 +12,5 @@ test:
   override:
     - (cd meancoach_project && flake8 *.py)
     - (cd meancoach_project && py.test)
-    - echo pwd
+    - echo `pwd`
 
