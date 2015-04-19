@@ -1,6 +1,8 @@
 machine:
   python:
     version: 2.7.5
+  environment:
+    PYTHONPATH: ~/meancoach/meancoach_project
 
 dependencies:
   pre:
@@ -9,6 +11,6 @@ dependencies:
 test:
   override:
     - (cd meancoach_project && flake8 *.py)
-    - (cd meancoach_project && PYTHONPATH=$PYTHONPATH:~/meancoach/meancoch_project/ py.test)
+    - (cd meancoach_project && py.test)
     - (cd meancoach_project && echo `pwd`)
 
