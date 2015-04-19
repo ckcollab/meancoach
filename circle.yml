@@ -1,8 +1,6 @@
 machine:
   python:
     version: 2.7.5
-  environment:
-    DJANGO_SETTINGS_MODULE: meancoach_project.settings.test
 
 dependencies:
   pre:
@@ -12,5 +10,5 @@ test:
   override:
     - (cd meancoach_project && flake8 *.py)
     - (cd meancoach_project && py.test --ds=meancoach_project.settings.test)
-    - echo `pwd`
+    - (cd meancoach_project && echo `pwd`)
 
