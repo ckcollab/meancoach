@@ -12,3 +12,5 @@ test:
   override:
     - (cd meancoach_project && flake8 *.py)
     - (cd meancoach_project && py.test)
+      environment:
+        DJANGO_SETTINGS_MODULE: settings.test
