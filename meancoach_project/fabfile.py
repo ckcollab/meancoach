@@ -22,9 +22,23 @@ def test_selenium():
 
 
 def test():
-    test_flake8()
-    test_django()
-    test_selenium()
+    print "%" * 80
+    print " Running tests..."
+    print "%" * 80
+    print ""
+
+    with hide('running', 'stdout', 'stderr', 'warnings', 'aborts'):
+        sys.stdout.write("Checking syntax...")
+        test_flake8()
+        print "done"
+
+        sys.stdout.write("Running Django tests...")
+        test_django()
+        print "done"
+
+        sys.stdout.write("Running Selenium tests...")
+        test_selenium()
+        print "done"
 
 
 def fresh_db():

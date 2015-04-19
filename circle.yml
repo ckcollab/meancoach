@@ -8,4 +8,5 @@ test:
   pre:
     - pip install -r requirements/test.pip
   override:
-    - fab test
+    - flake8
+    - (cd meancoach_project && py.test)
