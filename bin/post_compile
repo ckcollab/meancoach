@@ -23,5 +23,6 @@ fi
 # PUT ANY POST-BUILD STUFF HERE (like database migrations)
 #python app/manage.py syncdb --noinput
 #python app/manage.py migrate --noinput
+python app/manage.py collectstatic
 
 echo "-----> Post-compile done"
