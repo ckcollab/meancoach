@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -veo pipefail
 
-echo "-----> Running pre-compile hook"
+# The post_compile hook is run by heroku-buildpack-python
+
+echo "-----> Running post-compile hook"
 
 # Work around Heroku bug whereby pylibmc isn't available during
 # compile phase. See: https://github.com/heroku/heroku-buildpack-python/issues/57
@@ -22,4 +24,4 @@ fi
 #python app/manage.py syncdb --noinput
 #python app/manage.py migrate --noinput
 
-echo "-----> Pre-compile done"
+echo "-----> Post-compile done"
