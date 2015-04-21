@@ -21,13 +21,15 @@ if [ -f bin/install_nodejs ]; then
     npm install -g bower
 fi
 
+cd meancoach_project/
+
 bower install
 
 # PUT ANY POST-BUILD STUFF HERE (like database migrations)
 #python app/manage.py syncdb --noinput
 #python app/manage.py migrate --noinput
 
-cd meancoach_project/
+
 
 python manage.py collectstatic --noinput
 python manage.py syncdb --noinput
