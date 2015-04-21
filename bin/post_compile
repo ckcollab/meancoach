@@ -18,11 +18,18 @@ if [ -f bin/install_nodejs ]; then
     #npm install -g less
     #npm install -g iced-coffee-script
     npm install -g yuglify
+    npm install -g bower
 fi
 
 # PUT ANY POST-BUILD STUFF HERE (like database migrations)
 #python app/manage.py syncdb --noinput
 #python app/manage.py migrate --noinput
-python meancoach_project/manage.py collectstatic --noinput
+
+cd meancoach_project/
+
+python manage.py collectstatic --noinput
+python manage.py syncdb --noinput
+
+bower install
 
 echo "-----> Post-compile done"
