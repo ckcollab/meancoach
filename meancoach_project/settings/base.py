@@ -206,6 +206,7 @@ PIPELINE_CSS = {
         'output_filename': 'css/libs.min.css',
     }
 }
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 PIPELINE_JS = {
     'libraries': {
         'source_filenames': (
