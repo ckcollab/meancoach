@@ -26,13 +26,26 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-record"></i> Metrics <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#"><i class="glyphicon glyphicon-pencil"></i> Input</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-stats"></i> Trends</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-transfer"></i> Correlations</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="glyphicon glyphicon-calendar"></i> Goals</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="./">Fixed top</a></li>
-            </ul>
+            {% if request.user.is_authenticated %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="./">{{ request.user.username }}</a></li>
+                </ul>
+            {% else %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><i class="glyphicon glyphicon-user"></i> Sign up</a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-log-in"></i> Log in</a></li>
+                </ul>
+            {% endif %}
         </div>
     </div>
 </nav>

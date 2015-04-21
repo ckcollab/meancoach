@@ -44,6 +44,7 @@ INSTALLED_APPS = (
 
     # Project apps.
     'meancoach',
+    'metrics',
 )
 
 MIDDLEWARE_CLASSES = (
