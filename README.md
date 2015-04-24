@@ -1,18 +1,18 @@
 # meancoach
 
-`git clone https://github.com/dev-coop/meancoach.git`
+1) `git clone https://github.com/dev-coop/meancoach.git`
 
-`cd meancoach/meancoach_project`
+2) `cd meancoach/meancoach_project`
 
-Copy `settings/local.py.example` to `settings/local.py`
+3) Copy `settings/local.py.example` to `settings/local.py`
 
-`pip install -r requirements/base.pip`
+4) `pip install -r requirements/base.pip`
 
-`bower install`
+5) `bower install`
 
-`fab fresh_db`
+6) `fab fresh_db`
 
-`python manage.py runserver`
+7) `python manage.py runserver`
 
 # Run tests
 
