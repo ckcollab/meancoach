@@ -4,6 +4,8 @@
 
 `cd meancoach/meancoach_project`
 
+Copy `settings/local.py.example` to `settings/local.py`
+
 `pip install -r requirements/base.pip`
 
 `bower install`
