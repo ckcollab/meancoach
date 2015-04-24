@@ -1,6 +1,6 @@
 # meancoach
 
-After cloning this...
+`git clone https://github.com/dev-coop/meancoach.git`
 
 `cd meancoach/meancoach_project`
 
