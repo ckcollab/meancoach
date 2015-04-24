@@ -14,6 +14,8 @@
 
 7. `python manage.py runserver`
 
+8. [http://localhost:8000/](http://localhost:8000/) for your new server!
+
 # Run tests
 
 From `meancoach/meancoach_project` dir
