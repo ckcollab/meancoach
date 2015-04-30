@@ -47,9 +47,6 @@ def fresh_db():
     print "%" * 80
     print ""
 
-    # on heroku run heroku pg:reset DATABASEURL -- where database url is the
-    # env variable, thats it!
-
     with hide('running', 'stdout', 'stderr', 'warnings', 'aborts'):
         with settings(warn_only=True):
             sys.stdout.write("Dropping database...")
@@ -62,8 +59,7 @@ def fresh_db():
 
             sys.stdout.write("Syncdb and migrate...")
             local('python manage.py syncdb --noinput')
-            print "done"
 
     sys.stdout.write("[TODO] *** Initialize repo with data...")
     # local('python manage.py init')
-    # print "done"
+    print "done"
