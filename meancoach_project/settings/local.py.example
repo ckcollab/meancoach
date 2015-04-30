@@ -18,3 +18,5 @@ DEBUG_TOOLBAR_CONFIG = {
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY',
                        'a secret key')
+assert SECRET_KEY != 'a secret key', "Please change your SECRET_KEY " \
+                                     "in settings/local.py!"

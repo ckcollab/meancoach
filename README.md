@@ -4,7 +4,7 @@
 
 2. `cd meancoach/meancoach_project`
 
-3. Copy `settings/local.py.example` to `settings/local.py`
+3. `cp settings/local.py.example settings/local.py` and change your `SECRET_KEY`
 
 4. `pip install -r requirements/base.pip`
 
