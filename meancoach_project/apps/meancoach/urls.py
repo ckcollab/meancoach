@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from apps.meancoach.views import IndexPage
+from .views import IndexPage
 
 
 urlpatterns = [

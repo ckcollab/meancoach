@@ -41,11 +41,15 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # 3rd-party apps.
-    'django_extensions',
-    'pipeline',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'bootstrap3',
+    'django_extensions',
+    'django_tables2',
+    'material',
+    'material.admin',
+    'pipeline',
 
     # Project apps.
     'meancoach',

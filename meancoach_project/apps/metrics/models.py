@@ -1,16 +1,18 @@
 import datetime
-
 from datetime import timedelta
+
+from django.contrib.auth.models import User
 from django.db import models
 
 
 class Metric(models.Model):
+    creator = models.ForeignKey(User, related_name="metrics")
     name = models.CharField(max_length=100)
     description_worst = models.TextField(null=True, blank=True)
     description_best = models.TextField(null=True, blank=True)
-    daily = models.BooleanField(default=True)
-    monthly = models.BooleanField(default=False)
-    boolean = models.BooleanField(default=False)
+    daily = models.BooleanField(default=True, help_text="every day")
+    monthly = models.BooleanField(default=False, help_text="every month")
+    boolean = models.BooleanField(default=False, help_text="did or didn't (not a 0-10 measurement)")
 
     def how_often_string(self):
         if self.daily:
