@@ -27,10 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
 INSTALLED_APPS = (
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +43,9 @@ INSTALLED_APPS = (
     # 3rd-party apps.
     'django_extensions',
     'pipeline',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 
     # Project apps.
     'meancoach',
@@ -72,6 +77,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'allauth.account.context_processors.account',
+                'allauth.socialaccount.context_processors.socialaccount',
             ],
         },
     },
@@ -183,6 +190,9 @@ LOGGING = {
     }
 }
 
+#
+# Django Pipeline
+#
 PIPELINE_CSS = {
     'libraries': {
         'source_filenames': (
@@ -202,3 +212,21 @@ PIPELINE_JS = {
         'output_filename': 'js/libs.min.js',
     }
 }
+
+#
+# Django all auth
+#
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+# TODO: Remove this when django all auth updates!
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.template.context_processors.debug',
+    'django.template.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+    'django.contrib.messages.context_processors.messages',
+    'allauth.account.context_processors.account',
+    'allauth.socialaccount.context_processors.socialaccount',
+)

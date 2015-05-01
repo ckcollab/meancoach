@@ -59,6 +59,12 @@ def fresh_db():
 
             sys.stdout.write("Syncdb and migrate...")
             local('python manage.py syncdb --noinput')
+            print "done"
+
+            sys.stdout.write("Making super user admin//admin...")
+            local("echo \"from django.contrib.auth.models import User; User.objects.create_superuser('admin', "
+                  "'admin@example.com', 'admin')\" | python manage.py shell")
+            print "done"
 
     sys.stdout.write("[TODO] *** Initialize repo with data...")
     # local('python manage.py init')
