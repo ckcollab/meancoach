@@ -1,21 +1,25 @@
 # meancoach
 
-After cloning this...
+1. `git clone https://github.com/dev-coop/meancoach.git`
 
-`cd meancoach/meancoach_project`
+2. `cd meancoach/meancoach_project`
 
-`pip install -r requirements/base.pip`
+3. `export DJANGO_SETTINGS_MODULE=settings.local` added to your `postactivate` script
 
-`bower install`
+4. `cp settings/local.py.example settings/local.py` and change your `SECRET_KEY`
 
-`fab fresh_db`
+5. `pip install -r requirements/dev.pip`
 
-`python manage.py runserver`
+6. `bower install`
+
+7. `fab fresh_db`
+
+8. `python manage.py runserver`
+
+9. [http://localhost:8000/](http://localhost:8000/) for your new server!
 
 # Run tests
 
 From `meancoach/meancoach_project` dir
-
-`pip install -r requirements/dev.pip`
 
 `fab test`
