@@ -196,6 +196,7 @@ LOGGING = {
 #
 # Django Pipeline
 #
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
 PIPELINE_CSS = {
     'libraries': {
         'source_filenames': (
