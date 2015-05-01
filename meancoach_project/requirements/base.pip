@@ -7,5 +7,5 @@ dj-database-url==0.3.0
 dj-static==0.0.6
 jsmin==2.1.1
 django-allauth==0.19.1
-django-material==0.2.1
+django-bootstrap3==5.4.0
 django-tables2==0.16.0

@@ -47,8 +47,6 @@ INSTALLED_APPS = (
     'bootstrap3',
     'django_extensions',
     'django_tables2',
-    'material',
-    'material.admin',
     'pipeline',
 
     # Project apps.
