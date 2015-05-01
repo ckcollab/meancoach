@@ -49,6 +49,7 @@ def fresh_db():
 
     with hide('running', 'stdout', 'stderr', 'warnings', 'aborts'):
         with settings(warn_only=True):
+            database_name = django_settings.DATABASES['default']['NAME']
             database_engine = django_settings.DATABASES['default']['ENGINE']
 
             if database_engine == 'django.db.backends.sqlite3':
@@ -57,11 +58,11 @@ def fresh_db():
                 print "done"
             elif database_engine == 'django.db.backends.postgresql_psycopg2':
                 sys.stdout.write("Dropping database...")
-                local('dropdb %s' % django_settings.DATABASES['default']['NAME'])
+                local('dropdb %s' % database_name)
                 print "done"
 
                 sys.stdout.write("Creating database...")
-                local('createdb %s' % django_settings.DATABASES['default']['NAME'])
+                local('createdb %s' % database_name)
                 print "done"
 
             sys.stdout.write("Syncdb and migrate...")
