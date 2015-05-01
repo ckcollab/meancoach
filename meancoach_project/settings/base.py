@@ -224,6 +224,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = True
 
 # TODO: Remove this when django all auth updates!
 TEMPLATE_CONTEXT_PROCESSORS = (
