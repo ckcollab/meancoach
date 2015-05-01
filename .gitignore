@@ -67,3 +67,6 @@ meancoach_project/collected_static
 
 # Bower
 bower_components
+
+# sqlite
+meancoach_project/sqlite_database

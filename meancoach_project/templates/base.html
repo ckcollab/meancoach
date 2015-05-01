@@ -31,7 +31,13 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="./">Fixed top</a></li>
+
+                {% if request.user.is_authenticated %}
+                    <li class="active"><a href="{% url 'account_logout' %}">Logout</a></li>
+                {% else %}
+                    <li class="active"><a href="{% url 'account_login' %}">Login</a></li>
+                    <li class="active"><a href="{% url 'account_signup' %}">Sign up</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
