@@ -4,6 +4,8 @@
   "keywords": [],
   "addons": ["heroku-postgresql:hobby-dev"],
   "env": {
-    "DJANGO_SECRET_KEY": "(*0&14%ihg0ui+103+@%2pe12_c)x@w2m%6s(jhs^)dc$&&g93"
+    "DJANGO_SECRET_KEY": "(*0&14%ihg0ui+103+@%2pe12_c)x@w2m%6s(jhs^)dc$&&g93",
+    "DJANGO_SETTINGS_MODULE": "settings.production",
+    "DISABLE_COLLECTSTATIC": "1"
   }
 }
