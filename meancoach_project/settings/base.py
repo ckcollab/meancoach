@@ -220,6 +220,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+LOGIN_REDIRECT_URL = '/'
 
 # TODO: Remove this when django all auth updates!
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -230,3 +231,5 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'allauth.account.context_processors.account',
     'allauth.socialaccount.context_processors.socialaccount',
 )
+
+
