@@ -18,7 +18,6 @@ class MetricForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(MetricForm, self).clean()
 
-
         if not cleaned_data['daily'] and not cleaned_data['monthly']:
             raise forms.ValidationError("Please select daily or monthly")
         elif cleaned_data['daily'] and cleaned_data['monthly']:

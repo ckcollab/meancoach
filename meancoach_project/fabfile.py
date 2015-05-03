@@ -10,15 +10,15 @@ from django.conf import settings as django_settings
 
 
 def test_django():
-    local('py.test apps/**/tests/*.py')
+    local('py.test apps/**/tests/*.py', capture=True)
 
 
 def test_flake8():
-    local('flake8 *.py')
+    local('flake8 *.py', capture=True)
 
 
 def test_selenium():
-    local('py.test tests/functional/*.py')
+    local('py.test tests/functional/*.py', capture=True)
 
 
 def test():

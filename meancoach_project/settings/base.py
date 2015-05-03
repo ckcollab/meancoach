@@ -48,11 +48,13 @@ INSTALLED_APPS = (
     'django_extensions',
     'django_tables2',
     'pipeline',
-
+)
+MEANCOACH_APPS = (
     # Project apps.
     'meancoach',
     'metrics',
 )
+INSTALLED_APPS = INSTALLED_APPS + MEANCOACH_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

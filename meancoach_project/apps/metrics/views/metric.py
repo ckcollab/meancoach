@@ -6,9 +6,9 @@ from django.views.generic import CreateView, UpdateView, DeleteView, \
 from django_tables2 import SingleTableMixin
 
 from apps.core.views import LoginRequiredMixin
-from .forms import MetricForm, MetricRecordForm
-from .models import Metric, MetricRecord
-from .tables import MetricTable
+from ..forms import MetricForm, MetricRecordForm
+from ..models import Metric, MetricRecord
+from ..tables import MetricTable
 
 
 class MetricViewMixin(object):
