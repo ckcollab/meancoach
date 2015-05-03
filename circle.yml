@@ -9,7 +9,7 @@ machine:
 
 dependencies:
   pre:
-    - pip install -r meancoach_project/requirements/test.pip
+    - pip install -r meancoach_project/requirements/dev.pip
 
 test:
   override:
