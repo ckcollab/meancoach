@@ -16,8 +16,8 @@ class SmokeTestMetrics(TestCase):
         self.metric = Metric.objects.create(creator=self.user, name="test metric")
         self.views = (
             # (view name, kwargs)
-            ('list',),
-            ('create',),
+            ('list', None),
+            ('create', None),
             ('update', {'pk': self.metric.pk}),
             ('delete', {'pk': self.metric.pk}),
         )
