@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "gulp": "~3.8.11",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "riot": "~2.0.15"
   }
 }

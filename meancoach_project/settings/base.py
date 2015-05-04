@@ -214,6 +214,7 @@ PIPELINE_JS = {
         'source_filenames': (
             'bower_components/jquery/dist/jquery.js',
             'bower_components/bootstrap/dist/js/bootstrap.js',
+            'bower_components/riot/riot+compiler.js',
         ),
         'output_filename': 'js/libs.min.js',
     }
