@@ -1,3 +1,5 @@
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 # meancoach
 
 1. `git clone https://github.com/dev-coop/meancoach.git`

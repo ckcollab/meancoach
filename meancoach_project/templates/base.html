@@ -22,21 +22,29 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Mean Coach</a>
+            <a class="navbar-brand" href="{% url 'meancoach:index' %}">Mean Coach</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-record"></i> Metrics <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{% url 'metrics:list' %}"><i class="glyphicon glyphicon-list"></i> Your metrics</a></li>
+                        <li><a href="{% url 'metrics:create' %}"><i class="glyphicon glyphicon-plus"></i> Create</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-pencil"></i> Input</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-stats"></i> Trends</a></li>
+                        <li><a href="#"><i class="glyphicon glyphicon-transfer"></i> Correlations</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><i class="glyphicon glyphicon-calendar"></i> Goals</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
                 {% if request.user.is_authenticated %}
-                    <li class="active"><a href="{% url 'account_logout' %}">Logout</a></li>
+                    <li><a href="{% url 'account_logout' %}">Logout</a></li>
                 {% else %}
-                    <li class="active"><a href="{% url 'account_login' %}">Login</a></li>
-                    <li class="active"><a href="{% url 'account_signup' %}">Sign up</a></li>
+                    <li><a href="{% url 'account_signup' %}"><i class="glyphicon glyphicon-user"></i> Sign up</a></li>
+                    <li><a href="{% url 'account_login' %}"><i class="glyphicon glyphicon-log-in"></i> Login</a></li>
                 {% endif %}
             </ul>
         </div>

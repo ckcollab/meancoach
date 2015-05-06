@@ -41,15 +41,20 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     # 3rd-party apps.
-    'django_extensions',
-    'pipeline',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
+    'bootstrap3',
+    'django_extensions',
+    'django_tables2',
+    'pipeline',
+)
+MEANCOACH_APPS = (
     # Project apps.
     'meancoach',
+    'metrics',
 )
+INSTALLED_APPS = INSTALLED_APPS + MEANCOACH_APPS
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -193,6 +198,7 @@ LOGGING = {
 #
 # Django Pipeline
 #
+PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
 PIPELINE_CSS = {
     'libraries': {
         'source_filenames': (
@@ -221,6 +227,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = True
 
 # TODO: Remove this when django all auth updates!
 TEMPLATE_CONTEXT_PROCESSORS = (

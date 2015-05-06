@@ -3,11 +3,16 @@ import dj_database_url
 from base import *
 
 
-DATABASES['default'] =  dj_database_url.config()
+DATABASES = {
+    'default': dj_database_url.config()
+}
 
 DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com']
+
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", None)
+assert SECRET_KEY, "Set your DJANGO_SECRET_KEY env var"
 
 
 # Use the cached template loader so template is compiled once and read from

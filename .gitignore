@@ -59,6 +59,9 @@ target/
 # IDEs
 .idea/
 
+# Trash
+.DS_Store
+
 # Settings
 meancoach_project/settings/local.py
 

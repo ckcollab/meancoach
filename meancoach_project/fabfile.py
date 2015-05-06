@@ -10,15 +10,15 @@ from django.conf import settings as django_settings
 
 
 def test_django():
-    local('py.test apps/**/tests/*.py')
+    local('py.test apps/**/tests/*.py', capture=True)
 
 
 def test_flake8():
-    local('flake8 *.py')
+    local('flake8 *.py', capture=True)
 
 
 def test_selenium():
-    local('py.test tests/functional/*.py')
+    local('py.test tests/functional/*.py', capture=True)
 
 
 def test():
@@ -49,16 +49,25 @@ def fresh_db():
 
     with hide('running', 'stdout', 'stderr', 'warnings', 'aborts'):
         with settings(warn_only=True):
-            sys.stdout.write("Dropping database...")
-            local('dropdb %s' % django_settings.DATABASES['default']['NAME'])
-            print "done"
+            database_name = django_settings.DATABASES['default']['NAME']
+            database_engine = django_settings.DATABASES['default']['ENGINE']
 
-            sys.stdout.write("Creating database...")
-            local('createdb %s' % django_settings.DATABASES['default']['NAME'])
-            print "done"
+            if database_engine == 'django.db.backends.sqlite3':
+                sys.stdout.write("Dropping database...")
+                local('rm sqlite_database')
+                print "done"
+            elif database_engine == 'django.db.backends.postgresql_psycopg2':
+                sys.stdout.write("Dropping database...")
+                local('dropdb %s' % database_name)
+                print "done"
+
+                sys.stdout.write("Creating database...")
+                local('createdb %s' % database_name)
+                print "done"
 
             sys.stdout.write("Syncdb and migrate...")
             local('python manage.py syncdb --noinput')
+            local('python manage.py migrate')
             print "done"
 
             sys.stdout.write("Making super user admin//admin...")
