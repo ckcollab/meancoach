@@ -28,12 +28,12 @@ class MetricViewMixin(object):
 
 
 class MetricListView(MetricViewMixin, LoginRequiredMixin, SingleTableMixin, ListView):
-    template_name = "metrics/list.html"
+    template_name = "metric/list.html"
     table_class = MetricTable
 
 
 class MetricDeleteView(MetricViewMixin, LoginRequiredMixin, DeleteView):
-    template_name = 'metrics/confirm_delete.html'
+    template_name = 'metric/confirm_delete.html'
 
 
 class MetricFormMixin(object):
@@ -48,7 +48,7 @@ class MetricFormMixin(object):
 
 
 class MetricCreateView(MetricViewMixin, MetricFormMixin, LoginRequiredMixin, CreateView):
-    template_name = "metrics/form.html"
+    template_name = "metric/form.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -58,7 +58,7 @@ class MetricCreateView(MetricViewMixin, MetricFormMixin, LoginRequiredMixin, Cre
 
 
 class MetricUpdateView(MetricViewMixin, MetricFormMixin, LoginRequiredMixin, UpdateView):
-    template_name = "metrics/form.html"
+    template_name = "metric/form.html"
 
     def form_valid(self, form):
         return self.check_save_add_another(form)

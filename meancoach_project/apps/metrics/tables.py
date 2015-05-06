@@ -4,9 +4,9 @@ from .models import Metric, MetricRecord
 
 
 class MetricTable(tables.Table):
-    update = tables.TemplateColumn(template_name="metrics/_update_row.html",
+    update = tables.TemplateColumn(template_name="metric/_update_row.html",
                                    sortable=False)
-    delete = tables.TemplateColumn(template_name="metrics/_delete_row.html",
+    delete = tables.TemplateColumn(template_name="metric/_delete_row.html",
                                    sortable=False)
 
     class Meta:

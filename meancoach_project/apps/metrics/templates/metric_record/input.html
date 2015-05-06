@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block extra_head %}
+    <script src="{% static 'riot/test.tag' %}" type="riot/tag"></script>
+
+    <script>
+        riot.mount('*');
+    </script>
+{% endblock %}
+
+{% block content %}
+
+    <test-tag></test-tag>
+
+{% endblock %}

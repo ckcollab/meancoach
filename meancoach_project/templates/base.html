@@ -1,7 +1,6 @@
 {% load staticfiles %}
 {% load pipeline %}
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +9,8 @@
 
     {% stylesheet 'libraries' %}
     {% javascript 'libraries' %}
+
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
 
@@ -31,7 +32,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="{% url 'metrics:list' %}"><i class="glyphicon glyphicon-list"></i> Your metrics</a></li>
                         <li><a href="{% url 'metrics:create' %}"><i class="glyphicon glyphicon-plus"></i> Create</a></li>
-                        <li><a href="#"><i class="glyphicon glyphicon-pencil"></i> Input</a></li>
+                        <li><a href="{% url 'metrics:input' %}"><i class="glyphicon glyphicon-pencil"></i> Input</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-stats"></i> Trends</a></li>
                         <li><a href="#"><i class="glyphicon glyphicon-transfer"></i> Correlations</a></li>
                     </ul>
