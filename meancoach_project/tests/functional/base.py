@@ -17,5 +17,4 @@ class SeleniumTestCase(LiveServerTestCase):
         super(SeleniumTestCase, cls).tearDownClass()
 
     def get(self, url):
-        print self.live_server_url
         return self.selenium.get('%s%s' % (self.live_server_url, url))
