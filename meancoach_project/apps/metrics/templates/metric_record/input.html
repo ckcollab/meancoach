@@ -2,16 +2,29 @@
 
 {% load staticfiles %}
 
+{% block title %}Input{% endblock %}
+
 {% block extra_head %}
-    <script src="{% static 'riot/test.tag' %}" type="riot/tag"></script>
+    <script src="{% static 'riot/metric_record_form.tag' %}" type="riot/tag"></script>
 
     <script>
-        riot.mount('*');
+        var context = {{ javascript_context_holder|safe }};
+        riot.mount('*', {
+            date: context["date"],
+            day_of_month: context["day_of_month"]
+        });
     </script>
 {% endblock %}
 
 {% block content %}
+    <metric-record-form title="Daily Metrics"
+                        metrics="{ context['daily_entries'] }">
 
-    <test-tag></test-tag>
+    </metric-record-form>
 
+    <metric-record-form title="Monthly Metrics"
+                        metrics="{ context['monthly_entries'] }"
+                        only_show_first_of_month="1">
+
+    </metric-record-form>
 {% endblock %}

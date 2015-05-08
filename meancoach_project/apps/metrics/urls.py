@@ -12,5 +12,5 @@ urlpatterns = [
     url(r'update/(?P<pk>\d+)/$', views.MetricUpdateView.as_view(), name='update'),
 
     # Metric Records
-    url(r'input', TemplateView.as_view(template_name='metric_record/input.html'), name='input')
+    url(r'input', views.metric_record_input, name='input')
 ]
