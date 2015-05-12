@@ -212,9 +212,9 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 PIPELINE_JS = {
     'libraries': {
         'source_filenames': (
-            'bower_components/jquery/dist/jquery.js',
-            'bower_components/bootstrap/dist/js/bootstrap.js',
-            'bower_components/riot/riot+compiler.js',
+            'bower_components/jquery/dist/jquery.min.js',
+            'bower_components/bootstrap/dist/js/bootstrap.min.js',
+            'bower_components/riot/riot+compiler.min.js',
             'bower_components/moment/moment.js',
         ),
         'output_filename': 'js/libs.min.js',

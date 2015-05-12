@@ -1,8 +1,9 @@
 <metric-record-form>
-    <div class="panel panel-default { hide: opts.only_show_first_of_month && opts.day_of_month != 1 }">
+    <div class="panel panel-default" hide="{ opts.only_show_first_of_month && opts.day_of_month != 1 }">
         <div class="panel-heading">
             <h1>{ opts.title } <small>for { moment(opts.date).format("MMM Do") }</small></h1>
-            <div class="{ hide: opts.only_show_first_of_month }">
+
+            <div hide="{ opts.only_show_first_of_month }">
                 <a href="input?date={ moment(opts.date).subtract(1, 'days').format() }">
                     <small>previous day</small>
                 </a> -
@@ -17,7 +18,7 @@
         </div>
     </div>
 
-    
+
 </metric-record-form>
 
 <metric-record-form-input>
