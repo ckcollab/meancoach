@@ -1,13 +1,13 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import Http404, HttpResponseRedirect
 from django.views.generic import CreateView, UpdateView, DeleteView, \
-    DetailView, ListView
+    ListView
 
 from django_tables2 import SingleTableMixin
 
 from core.views import LoginRequiredMixin
-from ..forms import MetricForm, MetricRecordForm
-from ..models import Metric, MetricRecord
+from ..forms import MetricForm
+from ..models import Metric
 from ..tables import MetricTable
 
 

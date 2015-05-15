@@ -1,6 +1,6 @@
 import django_tables2 as tables
 
-from .models import Metric, MetricRecord
+from .models import Metric
 
 
 class MetricTable(tables.Table):

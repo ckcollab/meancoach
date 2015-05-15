@@ -212,10 +212,12 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 PIPELINE_JS = {
     'libraries': {
         'source_filenames': (
+            # Had to include 'min' versions here or JS broke!
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap/dist/js/bootstrap.min.js',
             'bower_components/riot/riot+compiler.min.js',
             'bower_components/moment/moment.js',
+            'bower_components/q/q.js',
         ),
         'output_filename': 'js/libs.min.js',
     }
@@ -240,5 +242,3 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'allauth.account.context_processors.account',
     'allauth.socialaccount.context_processors.socialaccount',
 )
-
-

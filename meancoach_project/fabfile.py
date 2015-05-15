@@ -9,36 +9,52 @@ django.settings_module('settings.local')
 from django.conf import settings as django_settings
 
 
-def test_django():
-    local('py.test apps/**/tests/*.py', capture=True)
+def _print(str):
+    sys.stdout.write(str)
+    sys.stdout.flush()
 
 
-def test_flake8():
-    local('flake8 *.py', capture=True)
+def _py_test(test_command, test_name):
+    if test_name:
+        test_name = '-k %s' % test_name
+    local('%s %s' % (test_command, test_name), capture=True)
 
 
-def test_selenium():
-    local('py.test tests/functional/*.py', capture=True)
+def test_e2e(k=''):
+    '''Optionally pass 'k' argument to filter by test name, i.e.:
+    fab test_e2e:k=test_pipeline_compiles_javascript_properly'''
+    with hide('running', 'stdout', 'stderr', 'warnings', 'aborts'):
+        _print("Running Selenium tests...")
+        _py_test('py.test tests/functional/*.py', k)
+        print "done"
+
+
+def test_django(k=''):
+    '''Optionally pass 'k' argument to filter by test name, i.e.:
+    fab test_e2e:k=test_pipeline_compiles_javascript_properly'''
+    with hide('running', 'stdout', 'stderr', 'warnings', 'aborts'):
+        _print("Running Django tests...")
+        _py_test('py.test apps/**/tests/*.py', k)
+        print "done"
+
+
+def test_lint():
+    with hide('running', 'stdout', 'stderr', 'warnings', 'aborts'):
+        _print("Checking syntax...")
+        local('flake8 . --exclude=*/migrations/* --max-line-length=120 --ignore=F403',
+              capture=True)
+        print "done"
 
 
 def test():
     print "%" * 80
-    print " Running tests..."
+    print " Running all tests..."
     print "%" * 80
     print ""
 
-    with hide('running', 'stdout', 'stderr', 'warnings', 'aborts'):
-        sys.stdout.write("Checking syntax...")
-        test_flake8()
-        print "done"
-
-        sys.stdout.write("Running Django tests...")
-        test_django()
-        print "done"
-
-        sys.stdout.write("Running Selenium tests...")
-        test_selenium()
-        print "done"
+    test_lint()
+    test_django()
+    test_e2e()
 
 
 def fresh_db():
@@ -53,29 +69,29 @@ def fresh_db():
             database_engine = django_settings.DATABASES['default']['ENGINE']
 
             if database_engine == 'django.db.backends.sqlite3':
-                sys.stdout.write("Dropping database...")
+                _print("Dropping database...")
                 local('rm sqlite_database')
                 print "done"
             elif database_engine == 'django.db.backends.postgresql_psycopg2':
-                sys.stdout.write("Dropping database...")
+                _print("Dropping database...")
                 local('dropdb %s' % database_name)
                 print "done"
 
-                sys.stdout.write("Creating database...")
+                _print("Creating database...")
                 local('createdb %s' % database_name)
                 print "done"
 
-            sys.stdout.write("Syncdb and migrate...")
+            _print("Syncdb and migrate...")
             local('python manage.py syncdb --noinput')
             local('python manage.py migrate')
             print "done"
 
-            sys.stdout.write("Making super user admin//admin...")
+            _print("Making super user admin//admin...")
             local("echo \"from django.contrib.auth.models import User; "
                   "User.objects.create_superuser('admin', 'admin@example.com',"
                   " 'admin')\" | python manage.py shell")
             print "done"
 
-    sys.stdout.write("[TODO] *** Initialize repo with data...")
+    _print("[TODO] *** Initialize repo with data...")
     # local('python manage.py init')
     print "done"

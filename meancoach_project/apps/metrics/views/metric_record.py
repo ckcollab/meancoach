@@ -63,7 +63,7 @@ def metric_record_input(request):
             monthly_entries.append(jsond_metric_model)
 
     context = {
-        "javascript_context_holder" : json.dumps({
+        "javascript_context_holder": json.dumps({
             'daily_checklist': daily_checklist,
             'daily_entries': daily_entries,
             'monthly_entries': monthly_entries,
