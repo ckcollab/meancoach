@@ -73,6 +73,7 @@ def metric_record_input(request):
     }
 
     if request.is_ajax():
-        return HttpResponse(json.dumps(context['javascript_context_holder']))
+        return HttpResponse(json.dumps(context['javascript_context_holder']),
+                            content_type="application/json")
     else:
         return render(request, 'metric_record/input.html', context)
