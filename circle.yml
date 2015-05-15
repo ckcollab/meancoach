@@ -13,10 +13,4 @@ dependencies:
 
 test:
   override:
-    - (cd meancoach_project && flake8 *.py)
-    - (cd meancoach_project && py.test)
-    - (cd meancoach_project && echo `pwd`)
-    - echo $PYTHONPATH
-    - echo $PATH
-    - pip freeze
-
+    - (cd meancoach_project && fab test)
