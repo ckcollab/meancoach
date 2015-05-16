@@ -72,6 +72,8 @@
                max="10"
                value="{ this.measurement }"
                onchange="{ this.on_measurement_change }">
+
+        <textarea name="notes">{ this.notes }</textarea>
     </div>
 
     // Component methods

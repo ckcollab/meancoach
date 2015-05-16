@@ -10,7 +10,7 @@ class Metric(models.Model):
     name = models.CharField(max_length=100)
     description_worst = models.TextField(null=True, blank=True)
     description_best = models.TextField(null=True, blank=True)
-    daily = models.BooleanField(default=True, help_text="every day")
+    daily = models.BooleanField(default=False, help_text="every day")
     monthly = models.BooleanField(default=False, help_text="every month")
     boolean = models.BooleanField(default=False, help_text="did or didn't (not a 0-10 measurement)")
 

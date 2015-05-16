@@ -92,6 +92,6 @@ def fresh_db():
                   " 'admin')\" | python manage.py shell")
             print "done"
 
-    _print("[TODO] *** Initialize repo with data...")
-    # local('python manage.py init')
-    print "done"
+            _print("Initialize repo with data...")
+            local('python manage.py generate_data')
+            print "done"
