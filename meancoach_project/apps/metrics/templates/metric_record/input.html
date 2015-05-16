@@ -8,21 +8,28 @@
     <script src="{% static 'riot/metric_record_form.tag' %}" type="riot/tag"></script>
 
     <script>
+        function InputContext() {
+            riot.observable(this);
+
+            this.on('day_changed', function(new_data) {
+                // Called when the day is moved forwards or backwards
+            });
+        }
+
+        // Mount with context containing all data AND our input context event handler dealy
         var context = {{ javascript_context_holder|safe }};
-        riot.mount('*', {
-            date: context["date"],
-            day_of_month: context["day_of_month"]
-        });
+        context['input_context'] = new InputContext();
+        riot.mount('*', context);
     </script>
 {% endblock %}
 
 {% block content %}
     <metric-record-form title="Daily Metrics"
-                        metrics="{ context['daily_entries'] }">
+                        metric_context_name="daily_entries">
     </metric-record-form>
 
     <metric-record-form title="Monthly Metrics"
-                        metrics="{ context['monthly_entries'] }"
+                        metric_context_name="monthly_entries"
                         only_show_first_of_month="1">
     </metric-record-form>
 {% endblock %}

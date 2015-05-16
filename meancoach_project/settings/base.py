@@ -198,12 +198,15 @@ LOGGING = {
 #
 # Django Pipeline
 #
+PIPELINE_COMPILERS = (
+    'pipeline.compilers.stylus.StylusCompiler',
+)
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
 PIPELINE_CSS = {
     'libraries': {
         'source_filenames': (
             'bower_components/bootstrap/dist/css/bootstrap.css',
-            'css/main.css',
+            'stylus/main.styl',
         ),
         'output_filename': 'css/libs.min.css',
     }
@@ -218,6 +221,7 @@ PIPELINE_JS = {
             'bower_components/riot/riot+compiler.min.js',
             'bower_components/moment/moment.js',
             'bower_components/q/q.js',
+            'bower_components/lodash/lodash.min.js',
         ),
         'output_filename': 'js/libs.min.js',
     }

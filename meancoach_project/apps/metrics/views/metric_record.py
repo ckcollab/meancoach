@@ -9,11 +9,13 @@ from django.shortcuts import HttpResponse, render
 from ..models import Metric, MetricRecord
 
 
-def make_metric_record_jsonable(metric_record):
+def metric_record_to_json(metric_record):
     return {
         "name": metric_record.metric.name,
         "metric_id": metric_record.pk,
         "measurement": metric_record.measurement,
+        "description_best": metric_record.metric.description_best,
+        "description_worst": metric_record.metric.description_worst,
         "notes": metric_record.notes,
     }
 
@@ -54,7 +56,7 @@ def metric_record_input(request):
     monthly_entries = []
 
     for m in metric_records:
-        jsond_metric_model = make_metric_record_jsonable(m)
+        jsond_metric_model = metric_record_to_json(m)
         if m.metric.daily and m.metric.boolean:
             daily_checklist.append(jsond_metric_model)
         elif m.metric.daily and not m.metric.boolean:

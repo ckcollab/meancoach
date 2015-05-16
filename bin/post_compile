@@ -18,8 +18,13 @@ if [ -f bin/install_nodejs ]; then
     #npm install -g less
     #npm install -g iced-coffee-script
     #npm install -g yuglify
-    npm install -g bower
+
+
 fi
+
+npm install -g bower
+npm install -g stylus
+
 
 cd meancoach_project/
 
