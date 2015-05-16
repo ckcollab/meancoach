@@ -7,11 +7,11 @@
     </span>
 
     <metric-record-form title="Daily Metrics"
-                        metric_context_name="daily_entries">
+                        metrics="{ opts.daily_entries }">
     </metric-record-form>
 
     <metric-record-form title="Monthly Metrics"
-                        metric_context_name="monthly_entries"
+                        metrics="{ opts.monthly_entries }"
                         only_show_first_of_month="1">
     </metric-record-form>
 
@@ -56,34 +56,17 @@
 
     // Called when a form value has changed
     self.on('form_changed', function() {
-        for (child in self.tags['metric-record-form']) {
-            //console.log(child);
-            //console.log(self.tags['metric-record-form'][child]);
-            //console.log(self.tags['metric-record-form'][child].opts);
-            //console.log(self.tags['metric-record-form'][child].opts);
-            var form = self.tags['metric-record-form'][child];
-            //form.opts.metrics = new_data[opts.metric_context_name];
-            //form.opts = _.extend(form.opts, new_data);
-            //form.update();
-            console.log(form.opts.metrics);
-            //self.update();
-            //console.log(form);
-
-        }
-
-
         delay(function() {
-            //console.log(self.opts);
-            console.log(self.opts.daily_entries[0].measurement);
+
+
+            // SEND SAVE STUFF HERE!!!
+
+
+
 
 
             set_status_bar('Pretend saved!', 'alert-success', 3000)
         }, 1500);
-
-        //$.post("?date=" + opts.date.format())
-
-
-        //self.trigger('form_save_failure');
     });
 
     // Called when form is saved successfully
@@ -113,7 +96,7 @@
     var self = this;
 
     self.load_data = function(new_data) {
-        opts.metrics = new_data[opts.metric_context_name];
+        //opts.metrics = new_data[opts.metric_context_name];
         opts = _.extend(opts, new_data);
         self.update();
     }
@@ -121,7 +104,22 @@
     /*
        Event handlers
      */
+    // Container events
     self.parent.on('day_changed', self.load_data);
+
+    // This form events
+    self.on('form_input_changed', function(input) {
+        for (metric in self.opts.metrics) {
+            // find the right metric to update
+            if (self.opts.metrics[metric].metric_id == input.metric_id) {
+                self.opts.metrics[metric].measurement = input.measurement;
+                self.opts.metrics[metric].notes = input.notes;
+            }
+        }
+        self.update();
+
+        self.parent.trigger('form_changed');
+    });
 
     /*
        Constructor/initializer
@@ -162,7 +160,6 @@
        Component methods
      */
     var self = this;
-    self.has_updated_in_last_3_seconds = false;
 
     // No data binding in riotjs, manually change the value
     self.on_form_value_changed = function(field_name) {
@@ -172,7 +169,8 @@
             self[field_name] = self["id_" + field_name].value;
             self.update();
 
-            self.parent.parent.trigger('form_changed');
+            // Note this triggers the parent form not the CONTAINER event
+            self.parent.trigger('form_input_changed', self);
         }
     }
 

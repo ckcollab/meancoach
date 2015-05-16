@@ -17,7 +17,7 @@
         // Mount with context containing all data AND our input context event handler dealy
         var context = {{ javascript_context_holder|safe }};
         //context['input_context'] = new InputContext();
-        riot.mount('*', context);
+        riot.mount('metric-record-form-container', context);
     </script>
 {% endblock %}
 
