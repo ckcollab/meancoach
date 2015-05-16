@@ -37,13 +37,6 @@
         self.change_day(1);
     }
 
-    //self.load_data = function(new_data) {
-    //   //opts.metrics = new_data[opts.metric_context_name];
-    //    opts = _.extend(opts, new_data);
-    //    self.update();
-    //    console.log(opts);
-    //}
-
     /*
        Event handlers
      */
@@ -96,7 +89,6 @@
     var self = this;
 
     self.load_data = function(new_data) {
-        //opts.metrics = new_data[opts.metric_context_name];
         opts = _.extend(opts, new_data);
         self.update();
     }
