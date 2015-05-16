@@ -1,3 +1,6 @@
+@import '../bower_components/animate.styl/animate.styl'
+
+
 user-select()
     -webkit-touch-callout arguments
     -webkit-user-select arguments
@@ -15,6 +18,20 @@ user-select()
 body
     padding 70px 0 70px 0;
 
+
+#bottom_status_bar
+    position fixed
+    bottom 0
+    left 0
+    right 0
+    padding 3px
+    text-align center
+
+
+/*****************************************************************************
+ Metric input page stuff
+ */
+
 metric-record-form-input
     .description_worst
         display block
@@ -22,9 +39,14 @@ metric-record-form-input
         padding 6px 4px 6px 8px
         margin-right 10px
 
-metric-record-form
+metric-record-form-container
     .day_link
         color #337AB7
         cursor pointer
         cursor hand
         user-select none
+    /*.status*/
+        /*position absolute*/
+        /*right 20px*/
+        /*top 5px*/
+

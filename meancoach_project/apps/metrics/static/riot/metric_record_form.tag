@@ -1,39 +1,30 @@
-<metric-record-form>
-    <div class="panel panel-default"
-         hide="{ opts.only_show_first_of_month && opts.day_of_month != 1 }">
-        <div class="panel-heading">
-            <h1>{ opts.title } <small>for { moment(opts.date).format("MMM Do") }</small></h1>
+<metric-record-form-container>
+    <span class="day_link" onclick="{ this.previous_day }">
+        <small>previous day</small>
+    </span> -
+    <span class="day_link" onclick="{ this.next_day }">
+        <small>next day</small>
+    </span>
 
-            <div hide="{ opts.only_show_first_of_month }">
-                <span class="day_link" onclick="{ this.previous_day }">
-                    <small>previous day</small>
-                </span> -
-                <span class="day_link" onclick="{ this.next_day }">
-                    <small>next day</small>
-                </span>
-            </div>
-        </div>
+    <metric-record-form title="Daily Metrics"
+                        metric_context_name="daily_entries">
+    </metric-record-form>
 
-        <div class="panel-body">
-            <metric-record-form-input each="{ opts.metrics }"></metric-record-form-input>
-        </div>
-    </div>
+    <metric-record-form title="Monthly Metrics"
+                        metric_context_name="monthly_entries"
+                        only_show_first_of_month="1">
+    </metric-record-form>
 
-    // Component methods
+    /*
+       Component methods
+     */
     var self = this;
 
-    self.load_data = function(new_data) {
-        opts.metrics = new_data[opts.metric_context_name];
-        opts = _.extend(opts, new_data);
-        self.update();
-
-        riot.route('date/' + moment(opts.date).format());
-    }
     self.change_day = function(day_difference) {
         var new_date = moment(opts.date).add(day_difference, 'days');
         $.get("?date=" + new_date.format())
             .success(function(data) {
-                opts.input_context.trigger('day_changed', $.parseJSON(data));
+                self.trigger('day_changed', $.parseJSON(data));
             })
             .error(function() {
                 console.log("error changin page");
@@ -46,12 +37,100 @@
         self.change_day(1);
     }
 
-    // Event handlers
-    opts.input_context.on('day_changed', self.load_data);
+    //self.load_data = function(new_data) {
+    //   //opts.metrics = new_data[opts.metric_context_name];
+    //    opts = _.extend(opts, new_data);
+    //    self.update();
+    //    console.log(opts);
+    //}
 
-    // Initializer/constructor
-    self.load_data(opts);
+    /*
+       Event handlers
+     */
+    // Called when the day is moved forwards or backwards
+    self.on('day_changed', function(new_data) {
+        riot.route('date/' + moment(opts.date).format());
+        opts = _.extend(opts, new_data);
+        self.update();
+    });
+
+    // Called when a form value has changed
+    self.on('form_changed', function() {
+        for (child in self.tags['metric-record-form']) {
+            //console.log(child);
+            //console.log(self.tags['metric-record-form'][child]);
+            //console.log(self.tags['metric-record-form'][child].opts);
+            //console.log(self.tags['metric-record-form'][child].opts);
+            var form = self.tags['metric-record-form'][child];
+            //form.opts.metrics = new_data[opts.metric_context_name];
+            //form.opts = _.extend(form.opts, new_data);
+            //form.update();
+            console.log(form.opts.metrics);
+            //self.update();
+            //console.log(form);
+
+        }
+
+
+        delay(function() {
+            //console.log(self.opts);
+            console.log(self.opts.daily_entries[0].measurement);
+
+
+            set_status_bar('Pretend saved!', 'alert-success', 3000)
+        }, 1500);
+
+        //$.post("?date=" + opts.date.format())
+
+
+        //self.trigger('form_save_failure');
+    });
+
+    // Called when form is saved successfully
+    self.on('form_save_success', function() {});
+
+    // Called when form is not saved successfully
+    self.on('form_save_failure', function() {});
+</metric-record-form-container>
+
+
+<metric-record-form>
+    <div class="panel panel-default"
+         hide="{ opts.only_show_first_of_month && opts.day_of_month != 1 }">
+        <div class="panel-heading">
+            <h1>{ opts.title } <small>for { moment(opts.date).format("MMM Do") }</small></h1>
+        </div>
+
+        <div class="panel-body">
+            <metric-record-form-input each="{ opts.metrics }">
+            </metric-record-form-input>
+        </div>
+    </div>
+
+    /*
+       Component methods
+     */
+    var self = this;
+
+    self.load_data = function(new_data) {
+        opts.metrics = new_data[opts.metric_context_name];
+        opts = _.extend(opts, new_data);
+        self.update();
+    }
+
+    /*
+       Event handlers
+     */
+    self.parent.on('day_changed', self.load_data);
+
+    /*
+       Constructor/initializer
+     */
+    // Have to initialize with data from parent first, then day_changed
+    // event is fired to update later
+    self.load_data(self.parent.opts);
 </metric-record-form>
+
 
 <metric-record-form-input>
     <div class="col-lg-6">
@@ -71,17 +150,30 @@
                min="1"
                max="10"
                value="{ this.measurement }"
-               onchange="{ this.on_measurement_change }">
-
-        <textarea name="notes">{ this.notes }</textarea>
+               onchange="{ this.on_form_value_changed('measurement') }">
+        <textarea id="id_notes"
+                  name="notes"
+                  oninput="{ this.on_form_value_changed('notes') }">
+            { this.notes }
+        </textarea>
     </div>
 
-    // Component methods
+    /*
+       Component methods
+     */
     var self = this;
+    self.has_updated_in_last_3_seconds = false;
 
-    self.on_measurement_change = function() {
-        // No data binding in riotjs, manually change the value
-        self.measurement = self.id_measurement.value;
+    // No data binding in riotjs, manually change the value
+    self.on_form_value_changed = function(field_name) {
+        return function() {
+            // In django forms typically the form's id == "id_the_name_of_field"
+            // and the "name" property of the field is "name_of_field"
+            self[field_name] = self["id_" + field_name].value;
+            self.update();
+
+            self.parent.parent.trigger('form_changed');
+        }
     }
 
     self.convert_to_hsl = function(value){

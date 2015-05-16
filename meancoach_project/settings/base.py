@@ -206,6 +206,7 @@ PIPELINE_CSS = {
     'libraries': {
         'source_filenames': (
             'bower_components/bootstrap/dist/css/bootstrap.css',
+            'bower_components/animate.styl/animate.styl',
             'stylus/main.styl',
         ),
         'output_filename': 'css/libs.min.css',
@@ -222,6 +223,7 @@ PIPELINE_JS = {
             'bower_components/moment/moment.js',
             'bower_components/q/q.js',
             'bower_components/lodash/lodash.min.js',
+            'js/helpers.js',
         ),
         'output_filename': 'js/libs.min.js',
     }

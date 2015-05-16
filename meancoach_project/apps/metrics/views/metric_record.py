@@ -37,7 +37,15 @@ def metric_record_input(request):
     metric_records_pks = [m.pk for m in metric_records]
 
     if request.method == "POST":
+        # Post data looks something like:
+        # {
+        #     "1": {"notes": "Some notes", "measurement: 5}
+        # }
+        #
+        # Where "1" is the PK of the metric we're editing this day
         data = json.loads(request.body)
+
+        print data
 
         for metric_pk, value in data.items():
             # Make sure we aren't editing something we don't mean to, like if we didn't refresh the page since yesterday
