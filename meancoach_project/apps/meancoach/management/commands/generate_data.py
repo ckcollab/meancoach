@@ -12,7 +12,10 @@ class Command(BaseCommand):
     help = 'Generate data for development (local/staging) environments'
 
     def handle(self, *args, **options):
-        admin = User.objects.get(username="admin")
+        try:
+            admin = User.objects.get(username="admin")
+        except User.DoesNotExist:
+            admin = User.objects.create_superuser("admin", "admin@test.com", "pass")
 
         premade_metrics = [
             # Daily
