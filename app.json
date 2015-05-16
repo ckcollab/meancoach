@@ -9,6 +9,6 @@
     "DISABLE_COLLECTSTATIC": "1"
   },
   "scripts": {
-    "postdeploy": "fab generate_data"
+    "postdeploy": "cd meancoach_project/ && fab generate_data"
   }
 }

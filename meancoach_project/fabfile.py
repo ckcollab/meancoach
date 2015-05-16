@@ -86,12 +86,6 @@ def fresh_db():
             local('python manage.py migrate')
             print "done"
 
-            _print("Making super user admin//admin...")
-            local("echo \"from django.contrib.auth.models import User; "
-                  "User.objects.create_superuser('admin', 'admin@example.com',"
-                  " 'admin')\" | python manage.py shell")
-            print "done"
-
             _print("Initialize repo with data...")
             local('python manage.py generate_data')
             print "done"
