@@ -104,7 +104,7 @@
         </div>
 
         <div class="panel-body">
-            <h3 hide="{ !opts.checklist }">Checklist</h3>
+            <h3 show="{ opts.checklist && opts.checklist.length > 0 }">Checklist</h3>
 
             <checklist each="{ opts.checklist }"></checklist>
 

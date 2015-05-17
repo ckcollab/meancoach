@@ -1,13 +1,11 @@
 import datetime
 import json
-import pytz
 
 from dateutil import parser
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import HttpResponse, render
-# from django.utils import timezone
 
 from ..models import Metric, Measurement
 
@@ -81,10 +79,6 @@ def measurement_input(request):
             'date': str(date),
         })
     }
-
-    # print date
-    # print context
-    # import ipdb;ipdb.set_trace()
 
     if request.is_ajax():
         return HttpResponse(json.dumps(context['javascript_context_holder']),

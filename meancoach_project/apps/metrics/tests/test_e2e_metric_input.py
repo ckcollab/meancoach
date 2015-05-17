@@ -1,10 +1,10 @@
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-# from django.test.utils import override_settings
+from django.test.utils import override_settings
 
 from tests.functional.base import SeleniumTestCase
 
-from ..models import Metric  # , Measurement
+from ..models import Metric
 
 
 class MetricRecordInputFunctionalTest(SeleniumTestCase):
@@ -26,15 +26,10 @@ class MetricRecordInputFunctionalTest(SeleniumTestCase):
 
         self.get(reverse('metrics:input'))
 
-        self.selenium.save_screenshot('screenshot.png')
-
     # Ensure we have production settings for this test so the js files are
     # minified (could cause problems not seen in dev)
-    # @override_settings(DEBUG=False)
-    # @override_settings(ALLOWED_HOSTS=['*'])
-    # def test_metric_input_page_form_is_visible(self):
-    #     # create user
-    #     # create metric
-    #     # go to metric input page
-    #     # see metric input form
-    #     assert False
+    @override_settings(DEBUG=False)
+    @override_settings(ALLOWED_HOSTS=['*'])
+    def test_metric_input_page_form_is_visible(self):
+        # Can we see a measurement input?
+        assert self.selenium.find_element_by_name("measurement")
