@@ -43,7 +43,7 @@ class MetricRecordInputFunctionalTest(SeleniumTestCase):
         assert (even_newer_date - new_date) == timedelta(days=1)
 
     def test_metric_input_page_saves_data_on_refresh(self):
-        input_slider = self.selenium.find_element_by_css_selector('input[type="range"]')
+        input_slider = self.selenium.find_element_by_id('id_measurement')
         # Change the value to 4
         input_slider.send_keys(Keys.ARROW_LEFT)
         textarea = self.selenium.find_element_by_css_selector('textarea')
@@ -51,7 +51,7 @@ class MetricRecordInputFunctionalTest(SeleniumTestCase):
         # Let the save happen
         time.sleep(3)
         self.get(reverse('metrics:input'))
-        input_slider = self.selenium.find_element_by_css_selector('input[type="range"]')
+        input_slider = self.selenium.find_element_by_id('id_measurement')
         textarea = self.selenium.find_element_by_css_selector('textarea')
         assert int(input_slider.get_attribute("value")) == 4
         # using 'in' here because weird formatting for textarea

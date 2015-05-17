@@ -42,7 +42,7 @@
      */
     // Called when the day is moved forwards or backwards
     self.on('day_changed', function(new_data) {
-        riot.route('date/' + moment(opts.date).format());
+        riot.route('date/' + moment(new_data.date).format());
         opts = _.extend(opts, new_data);
         self.update();
     });
@@ -92,11 +92,11 @@
 
 <metric-record-form>
     <div class="panel panel-default"
-         hide="{ opts.only_show_first_of_month && opts.day_of_month != 1 }">
+         hide="{ opts.only_show_first_of_month && this.parent.opts.day_of_month != 1 }">
         <div class="panel-heading">
             <h1>
                 { opts.title }
-                <small>for <span class="metric_date">{ moment(opts.date).format("MMM Do") }</span></small>
+                <small>for <span class="metric_date">{ moment(this.parent.opts.date).format("MMM Do") }</span></small>
             </h1>
         </div>
 
@@ -128,7 +128,10 @@
 
     // This form events
     self.on('form_input_changed', function(input) {
-        var all_metrics = self.opts.metrics.concat(self.opts.checklist);
+        var all_metrics = self.opts.metrics;
+        if(self.opts.checklist) {
+            all_metrics = self.opts.metrics.concat(self.opts.checklist);
+        }
 
         for (metric in all_metrics) {
             // find the right metric to update
