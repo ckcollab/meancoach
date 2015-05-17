@@ -21,8 +21,8 @@ test:
   override:
     - (cd meancoach_project && fab test)
 
-deployment:
-  staging:
-    branch: production
-    heroku:
-      appname: meancoach
+#deployment:
+#  staging:
+#    branch: production
+#    heroku:
+#      appname: meancoach
