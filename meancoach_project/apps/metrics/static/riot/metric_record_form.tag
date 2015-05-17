@@ -87,12 +87,6 @@
     self.on('form_save_failure', function() {
         set_status_bar('Failed to save, do you have an Internet connection?', 'alert-danger', 3000);
     });
-
-    /*
-       Constructor/initializer
-     */
-    //self.trigger('day_changed', opts);
-    //self.change_day(moment());
 </metric-record-form-container>
 
 
