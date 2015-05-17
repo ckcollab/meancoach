@@ -2,9 +2,9 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.test.utils import override_settings
 
-from tests.functional.base import SeleniumTestCase
+from .base import SeleniumTestCase
 
-from ..models import Metric
+from metrics.models import Metric
 
 
 class MetricRecordInputFunctionalTest(SeleniumTestCase):
