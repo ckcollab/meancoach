@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
-from ..models import Metric, MetricRecord
+from ..models import Metric
 
 
 class SmokeTestMetrics(TestCase):
@@ -15,7 +15,7 @@ class SmokeTestMetrics(TestCase):
         self.other_user = User.objects.create_user("other_user", password="test")
         self.metric = Metric.objects.create(creator=self.user, name="test metric")
         self.views = (
-            # (view name, kwargs)
+            # (view name, object pk used in view)
             ('list', None),
             ('create', None),
             ('update', {'pk': self.metric.pk}),
@@ -44,3 +44,18 @@ class SmokeTestMetrics(TestCase):
                 resp = self.client.get(reverse('metrics:%s' % view, kwargs=kwargs))
                 assert resp.status_code == 404, "metrics:%s view permissions" \
                                                 "not being enforced" % view
+
+
+class SmokeTestMetricRecords(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user("test", password="test")
+
+    def test_metric_records_page_returns_200_logged_in(self):
+        self.client.login(username="test", password="test")
+        resp = self.client.get(reverse('metrics:input'))
+        assert resp.status_code == 200
+
+    def test_metric_records_page_returns_302_not_logged_in(self):
+        resp = self.client.get(reverse('metrics:input'))
+        assert resp.status_code == 302

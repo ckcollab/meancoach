@@ -48,11 +48,13 @@ INSTALLED_APPS = (
     'django_extensions',
     'django_tables2',
     'pipeline',
+    'rest_framework',
 )
 MEANCOACH_APPS = (
     # Project apps.
     'meancoach',
     'metrics',
+    'api',
 )
 INSTALLED_APPS = INSTALLED_APPS + MEANCOACH_APPS
 
@@ -88,11 +90,6 @@ TEMPLATES = [
         },
     },
 ]
-
-if DEBUG:
-    STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
-else:
-    STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -198,12 +195,16 @@ LOGGING = {
 #
 # Django Pipeline
 #
+PIPELINE_COMPILERS = (
+    'pipeline.compilers.stylus.StylusCompiler',
+)
 PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.cssmin.CSSMinCompressor'
 PIPELINE_CSS = {
     'libraries': {
         'source_filenames': (
             'bower_components/bootstrap/dist/css/bootstrap.css',
-            'css/main.css',
+            'bower_components/animate.styl/animate.styl',
+            'stylus/main.styl',
         ),
         'output_filename': 'css/libs.min.css',
     }
@@ -212,12 +213,20 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.jsmin.JSMinCompressor'
 PIPELINE_JS = {
     'libraries': {
         'source_filenames': (
-            'bower_components/jquery/dist/jquery.js',
-            'bower_components/bootstrap/dist/js/bootstrap.js',
+            # Had to include 'min' versions here or JS broke!
+            'bower_components/lodash/lodash.js',
+            'bower_components/jquery/dist/jquery.min.js',
+            'bower_components/bootstrap/dist/js/bootstrap.min.js',
+            'bower_components/riot/riot+compiler.min.js',
+            'bower_components/moment/moment.js',
+            'bower_components/q/q.min.js',
+            'js/helpers.js',
         ),
         'output_filename': 'js/libs.min.js',
     }
 }
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 #
 # Django all auth
@@ -238,5 +247,3 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'allauth.account.context_processors.account',
     'allauth.socialaccount.context_processors.socialaccount',
 )
-
-

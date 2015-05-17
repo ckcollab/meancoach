@@ -73,3 +73,6 @@ bower_components
 
 # sqlite
 meancoach_project/sqlite_database
+
+# Tests
+screenshot.png

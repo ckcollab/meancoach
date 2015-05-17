@@ -1,13 +1,13 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import Http404, HttpResponseRedirect
 from django.views.generic import CreateView, UpdateView, DeleteView, \
-    DetailView, ListView
+    ListView
 
 from django_tables2 import SingleTableMixin
 
 from core.views import LoginRequiredMixin
-from ..forms import MetricForm, MetricRecordForm
-from ..models import Metric, MetricRecord
+from ..forms import MetricForm
+from ..models import Metric
 from ..tables import MetricTable
 
 
@@ -28,12 +28,12 @@ class MetricViewMixin(object):
 
 
 class MetricListView(MetricViewMixin, LoginRequiredMixin, SingleTableMixin, ListView):
-    template_name = "metrics/list.html"
+    template_name = "metric/list.html"
     table_class = MetricTable
 
 
 class MetricDeleteView(MetricViewMixin, LoginRequiredMixin, DeleteView):
-    template_name = 'metrics/confirm_delete.html'
+    template_name = 'metric/confirm_delete.html'
 
 
 class MetricFormMixin(object):
@@ -48,7 +48,7 @@ class MetricFormMixin(object):
 
 
 class MetricCreateView(MetricViewMixin, MetricFormMixin, LoginRequiredMixin, CreateView):
-    template_name = "metrics/form.html"
+    template_name = "metric/form.html"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -58,7 +58,7 @@ class MetricCreateView(MetricViewMixin, MetricFormMixin, LoginRequiredMixin, Cre
 
 
 class MetricUpdateView(MetricViewMixin, MetricFormMixin, LoginRequiredMixin, UpdateView):
-    template_name = "metrics/form.html"
+    template_name = "metric/form.html"
 
     def form_valid(self, form):
         return self.check_save_add_another(form)
