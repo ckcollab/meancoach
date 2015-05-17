@@ -250,7 +250,3 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'allauth.account.context_processors.account',
     'allauth.socialaccount.context_processors.socialaccount',
 )
-
-
-# DEBUG = False
-# ALLOWED_HOSTS = ['*']

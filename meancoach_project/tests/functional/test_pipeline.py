@@ -29,5 +29,4 @@ class PipelineFunctionalTest(SeleniumTestCase):
         responsive interface'''
         self.selenium.set_window_size(420, 600)
         self.get(reverse('meancoach:index'))
-        self.circleci_screenshot("hamburger button.png")
         assert self.selenium.find_element_by_css_selector('.hamburger_button')
