@@ -12,5 +12,7 @@ dependencies:
     - pip install -r meancoach_project/requirements/test.pip
 
 test:
+  pre:
+    - (cd meancoach_project && python manage.py collectstatic --noinput)
   override:
     - (cd meancoach_project && fab test)
