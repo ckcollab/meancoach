@@ -7,7 +7,8 @@
     </span>
 
     <metric-record-form title="Daily Metrics"
-                        metrics="{ opts.daily_entries }">
+                        metrics="{ opts.daily_entries }"
+                        checklist="{ opts.daily_checklist }">
     </metric-record-form>
 
     <metric-record-form title="Monthly Metrics"
@@ -20,21 +21,20 @@
      */
     var self = this;
 
-    self.change_day = function(day_difference) {
-        var new_date = moment(opts.date).add(day_difference, 'days');
+    self.change_day = function(new_date) {
         $.get("?date=" + new_date.format())
             .success(function(data) {
                 self.trigger('day_changed', $.parseJSON(data));
             })
             .error(function() {
-                console.log("error changin page");
+                alert('Could not change page, is your Internet connection working?');
             });
     }
     self.previous_day = function() {
-        self.change_day(-1);
+        self.change_day(moment(opts.date).add(-1, 'days'));
     }
     self.next_day = function() {
-        self.change_day(1);
+        self.change_day(moment(opts.date).add(1, 'days'));
     }
 
     /*
@@ -49,24 +49,50 @@
 
     // Called when a form value has changed
     self.on('form_changed', function() {
+        var raw_measurements = [].concat(
+            opts.daily_checklist,
+            opts.daily_entries,
+            opts.monthly_entries
+        )
+        var save_date = moment(opts.date).format();
+        var prepared_measurements = {};
+
+        for (i in raw_measurements) {
+            var metric_id = raw_measurements[i].metric_id;
+            prepared_measurements[metric_id] = {
+                notes: raw_measurements[i].notes,
+                measurement: raw_measurements[i].measurement
+            }
+        }
+
         delay(function() {
+            $.post("?date=" + save_date,
+                   JSON.stringify(prepared_measurements))
+                .success(function() {
+                    self.trigger('form_save_success');
+                })
+                .error(function() {
+                    self.trigger('form_save_failure');
+                });
 
-
-            // SEND SAVE STUFF HERE!!!
-
-
-
-
-
-            set_status_bar('Pretend saved!', 'alert-success', 3000)
-        }, 1500);
+        }, 2000);
     });
 
     // Called when form is saved successfully
-    self.on('form_save_success', function() {});
+    self.on('form_save_success', function() {
+        set_status_bar('Saved!', 'alert-success', 3000);
+    });
 
     // Called when form is not saved successfully
-    self.on('form_save_failure', function() {});
+    self.on('form_save_failure', function() {
+        set_status_bar('Failed to save, do you have an Internet connection?', 'alert-danger', 3000);
+    });
+
+    /*
+       Constructor/initializer
+     */
+    //self.trigger('day_changed', opts);
+    //self.change_day(moment());
 </metric-record-form-container>
 
 
@@ -78,8 +104,12 @@
         </div>
 
         <div class="panel-body">
-            <metric-record-form-input each="{ opts.metrics }">
-            </metric-record-form-input>
+            <h3 hide="{ !opts.checklist }">Checklist</h3>
+
+            <checklist each="{ opts.checklist }"></checklist>
+
+            <measurement each="{ opts.metrics }">
+            </measurement>
         </div>
     </div>
 
@@ -101,28 +131,51 @@
 
     // This form events
     self.on('form_input_changed', function(input) {
-        for (metric in self.opts.metrics) {
+        console.log(self.opts.metrics);
+
+        var all_metrics = self.opts.metrics.concat(self.opts.checklist);
+
+        console.log(input);
+
+        for (metric in all_metrics) {
             // find the right metric to update
-            if (self.opts.metrics[metric].metric_id == input.metric_id) {
-                self.opts.metrics[metric].measurement = input.measurement;
-                self.opts.metrics[metric].notes = input.notes;
+            if (all_metrics[metric].metric_id == input.metric_id) {
+                all_metrics[metric].measurement = input.measurement;
+                all_metrics[metric].notes = input.notes;
             }
         }
         self.update();
 
         self.parent.trigger('form_changed');
     });
-
-    /*
-       Constructor/initializer
-     */
-    // Have to initialize with data from parent first, then day_changed
-    // event is fired to update later
-    self.load_data(self.parent.opts);
 </metric-record-form>
 
 
-<metric-record-form-input>
+<checklist>
+    <label class="checkbox-inline">
+        <input type="checkbox"
+               id="id_measurement"
+               checked="{ this.measurement > 0 }"
+               onchange="{ this.checkbox_changed }">
+        { this.name }
+    </label>
+
+    /*
+       Component methods
+     */
+    var self = this;
+
+    self.checkbox_changed = function() {
+        this.measurement = this.id_measurement.checked ? 1 : 0;
+        self.update();
+
+        self.parent.trigger('form_input_changed', self);
+    };
+
+</checklist>
+
+
+<measurement>
     <div class="col-lg-6">
         <h3 class="title">
             <span class="label"
@@ -178,4 +231,4 @@
         }
         return 'hsl(' + hue + ', ' + sat + ', ' + l + ')';
     };
-</metric-record-form-input>
+</measurement>

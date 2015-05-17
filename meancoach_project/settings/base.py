@@ -48,11 +48,13 @@ INSTALLED_APPS = (
     'django_extensions',
     'django_tables2',
     'pipeline',
+    'rest_framework',
 )
 MEANCOACH_APPS = (
     # Project apps.
     'meancoach',
     'metrics',
+    'api',
 )
 INSTALLED_APPS = INSTALLED_APPS + MEANCOACH_APPS
 
@@ -248,3 +250,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'allauth.account.context_processors.account',
     'allauth.socialaccount.context_processors.socialaccount',
 )
+
+
+# DEBUG = False
+# ALLOWED_HOSTS = ['*']

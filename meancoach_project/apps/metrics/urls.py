@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'delete/(?P<pk>\d+)/$', views.MetricDeleteView.as_view(), name='delete'),
     url(r'update/(?P<pk>\d+)/$', views.MetricUpdateView.as_view(), name='update'),
 
-    # Metric Records
-    url(r'input', views.metric_record_input, name='input')
+    # Measurements
+    url(r'input', views.measurement_input, name='input')
 ]

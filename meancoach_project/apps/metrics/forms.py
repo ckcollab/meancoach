@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Metric, MetricRecord
+from .models import Metric, Measurement
 
 
 class MetricForm(forms.ModelForm):
@@ -29,10 +29,10 @@ class MetricForm(forms.ModelForm):
 
 class MetricRecordForm(forms.ModelForm):
     class Meta:
-        model = MetricRecord
+        model = Measurement
         fields = (
             'metric',
-            'datetime',
+            'when',
             'measurement',
             'notes',
         )

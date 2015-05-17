@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 
-from metrics.models import Metric, MetricRecord
+from metrics.models import Metric, Measurement
 
 
 class Command(BaseCommand):
@@ -15,7 +15,7 @@ class Command(BaseCommand):
         try:
             admin = User.objects.get(username="admin")
         except User.DoesNotExist:
-            admin = User.objects.create_superuser("admin", "admin@test.com", "pass")
+            admin = User.objects.create_superuser("admin", "admin@test.com", "admin")
 
         premade_metrics = [
             # Daily
@@ -53,9 +53,9 @@ class Command(BaseCommand):
             for n in range(30):
                 notes = None
                 measurement = 0
-                date = datetime.now() - timedelta(days=n)
+                date = datetime.utcnow() - timedelta(days=n)
 
-                if metric.daily or metric.monthly and not metric.boolean:
+                if (metric.daily or metric.monthly) and not metric.boolean:
                     if random.randint(1, 10) % 10 == 0:
                         notes = "Some random note"
                     measurement = random.randint(1, 10)
@@ -67,9 +67,11 @@ class Command(BaseCommand):
                     # Only add monthly metrics on first day of month
                     continue
 
-                MetricRecord.objects.create(
+                print metric, measurement
+
+                Measurement.objects.create(
                     metric=metric,
-                    datetime=date,
+                    when=date,
                     measurement=measurement,
                     notes=notes,
                 )

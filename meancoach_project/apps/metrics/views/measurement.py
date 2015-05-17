@@ -1,12 +1,15 @@
 import datetime
 import json
+import pytz
 
 from dateutil import parser
 
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import HttpResponse, render
+# from django.utils import timezone
 
-from ..models import Metric, MetricRecord
+from ..models import Metric, Measurement
 
 
 def metric_record_to_json(metric_record):
@@ -21,19 +24,19 @@ def metric_record_to_json(metric_record):
 
 
 @login_required()
-def metric_record_input(request):
+def measurement_input(request):
     date_string = request.GET.get('date', None)
     if date_string is not None and date_string is not '':
-        date = parser.parse(date_string)
+        date = parser.parse(date_string).replace(tzinfo=None)
     else:
-        date = datetime.date.today()
+        date = datetime.datetime.utcnow()
 
-    metrics = Metric.objects.all()
-    if date.day != 1:
+    metrics = Metric.objects.filter(daily=True, monthly=False)
+    if date.day == 1:
         # Not first day of month, so filter out monthly
-        metrics = Metric.objects.filter(daily=True, monthly=False)
+        metrics = Metric.objects.filter(Q(daily=True) | Q(monthly=True))
 
-    metric_records = [MetricRecord.objects.get_or_create(datetime=date, metric=m)[0] for m in metrics]
+    metric_records = [Measurement.objects.get_or_create(when=date, metric=m)[0] for m in metrics]
     metric_records_pks = [m.pk for m in metric_records]
 
     if request.method == "POST":
@@ -44,12 +47,9 @@ def metric_record_input(request):
         #
         # Where "1" is the PK of the metric we're editing this day
         data = json.loads(request.body)
-
-        print data
-
         for metric_pk, value in data.items():
             # Make sure we aren't editing something we don't mean to, like if we didn't refresh the page since yesterday
-            # it will only be working with datetime=today() by default
+            # it will only be working with when=today() by default
             if int(metric_pk) in metric_records_pks:
                 for m in metric_records:
                     if m.pk == int(metric_pk):
@@ -81,6 +81,10 @@ def metric_record_input(request):
             'date': str(date),
         })
     }
+
+    # print date
+    # print context
+    # import ipdb;ipdb.set_trace()
 
     if request.is_ajax():
         return HttpResponse(json.dumps(context['javascript_context_holder']),
