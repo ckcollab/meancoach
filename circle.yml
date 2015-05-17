@@ -20,3 +20,9 @@ test:
     - (cd meancoach_project && python manage.py collectstatic --noinput)
   override:
     - (cd meancoach_project && fab test)
+
+deployment:
+  staging:
+    branch: production
+    heroku:
+      appname: meancoach
