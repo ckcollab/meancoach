@@ -1,3 +1,5 @@
+import os
+
 from django.test import LiveServerTestCase
 
 from selenium.webdriver.phantomjs.webdriver import WebDriver
@@ -24,3 +26,8 @@ class SeleniumTestCase(LiveServerTestCase):
 
     def get(self, url):
         return self.selenium.get('%s%s' % (self.live_server_url, url))
+
+    def circleci_screenshot(self):
+        circle_dir = os.environ.get('CIRCLE_ARTIFACTS')
+        assert circle_dir, "Could not find CIRCLE_ARTIFACTS environment variable!"
+        self.selenium.get_screenshot_as_file(os.path.join(circle_dir, "screenshot.png"))

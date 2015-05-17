@@ -27,6 +27,7 @@ class MetricRecordInputFunctionalTest(SeleniumTestCase):
         self.get(reverse('metrics:input'))
         import time
         time.sleep(2)
+        self.circleci_screenshot()
 
     # Ensure we have production settings for this test so the js files are
     # minified (could cause problems not seen in dev)
