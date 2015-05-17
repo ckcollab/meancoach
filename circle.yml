@@ -3,6 +3,7 @@ machine:
     version: 2.7.5
   environment:
     DJANGO_SETTINGS_MODULE: settings.production
+    DJANGO_SECRET_KEY: 1234567890abcdefg
     PYTHONPATH: $PYTHONPATH:.
     PYTHONPATH: $PYTHONPATH:$HOME/meancoach
     PYTHONPATH: $PYTHONPATH:$HOME/meancoach/meancoach_project
@@ -14,6 +15,8 @@ dependencies:
 
 test:
   pre:
+    - (cd meancoach_project && npm install -g stylus)
+    - (cd meancoach_project && bower install)
     - (cd meancoach_project && python manage.py collectstatic --noinput)
   override:
     - (cd meancoach_project && fab test)
