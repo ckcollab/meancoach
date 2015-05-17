@@ -67,8 +67,6 @@ class Command(BaseCommand):
                     # Only add monthly metrics on first day of month
                     continue
 
-                print metric, measurement
-
                 Measurement.objects.create(
                     metric=metric,
                     when=date,

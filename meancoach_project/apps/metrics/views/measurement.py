@@ -84,4 +84,4 @@ def measurement_input(request):
         return HttpResponse(json.dumps(context['javascript_context_holder']),
                             content_type="application/json")
     else:
-        return render(request, 'metric_record/input.html', context)
+        return render(request, 'metric/measurements.html', context)

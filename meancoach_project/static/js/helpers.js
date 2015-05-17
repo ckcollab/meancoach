@@ -1,5 +1,5 @@
 // Buffers tasks to only execute ONCE after delay has ended
-var delay = (function() {
+window.delay = (function() {
     var timer = 0;
     return function(callback, ms) {
         clearTimeout (timer);
@@ -7,8 +7,7 @@ var delay = (function() {
     };
 })();
 
-
-var set_status_bar = function(message, css_class, fade_out_time) {
+window.set_status_bar = function(message, css_class, fade_out_time) {
     fade_out_time = fade_out_time || 3000;
     var result = $('#bottom_status_bar').html(message).addClass(css_class).fadeIn().fadeOut(fade_out_time);
 };
@@ -42,3 +41,8 @@ $.ajaxSetup({
         }
     }
 });
+
+// Selenium test helper
+window.onerror=function(msg){
+    $("body").attr("JSError",msg);
+};

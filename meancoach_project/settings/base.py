@@ -91,11 +91,6 @@ TEMPLATES = [
     },
 ]
 
-if DEBUG:
-    STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
-else:
-    STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -219,17 +214,19 @@ PIPELINE_JS = {
     'libraries': {
         'source_filenames': (
             # Had to include 'min' versions here or JS broke!
+            'bower_components/lodash/lodash.js',
             'bower_components/jquery/dist/jquery.min.js',
             'bower_components/bootstrap/dist/js/bootstrap.min.js',
             'bower_components/riot/riot+compiler.min.js',
             'bower_components/moment/moment.js',
-            'bower_components/q/q.js',
-            'bower_components/lodash/lodash.min.js',
+            'bower_components/q/q.min.js',
             'js/helpers.js',
         ),
         'output_filename': 'js/libs.min.js',
     }
 }
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
 
 #
 # Django all auth

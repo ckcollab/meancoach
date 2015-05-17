@@ -1,8 +1,8 @@
 <metric-record-form-container>
-    <span class="day_link" onclick="{ this.previous_day }">
+    <span class="day_link previous" onclick="{ this.previous_day }">
         <small>previous day</small>
     </span> -
-    <span class="day_link" onclick="{ this.next_day }">
+    <span class="day_link next" onclick="{ this.next_day }">
         <small>next day</small>
     </span>
 
@@ -100,7 +100,10 @@
     <div class="panel panel-default"
          hide="{ opts.only_show_first_of_month && opts.day_of_month != 1 }">
         <div class="panel-heading">
-            <h1>{ opts.title } <small>for { moment(opts.date).format("MMM Do") }</small></h1>
+            <h1>
+                { opts.title }
+                <small>for <span class="metric_date">{ moment(opts.date).format("MMM Do") }</span></small>
+            </h1>
         </div>
 
         <div class="panel-body">
@@ -131,11 +134,7 @@
 
     // This form events
     self.on('form_input_changed', function(input) {
-        console.log(self.opts.metrics);
-
         var all_metrics = self.opts.metrics.concat(self.opts.checklist);
-
-        console.log(input);
 
         for (metric in all_metrics) {
             // find the right metric to update

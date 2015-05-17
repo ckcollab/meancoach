@@ -1,15 +1,10 @@
 from django.core.urlresolvers import reverse
-from django.test.utils import override_settings
 
 from .base import SeleniumTestCase
 
 
 class PipelineFunctionalTest(SeleniumTestCase):
 
-    # Ensure we have production settings for this test so the js files are
-    # minified (could cause problems not seen in dev)
-    @override_settings(DEBUG=False)
-    @override_settings(ALLOWED_HOSTS=['*'])
     def test_pipeline_compiles_javascript_properly(self):
         '''For some reason javascript isn't minified properly, ensure that it
         is loaded properly by checking that the dropdown menu is available
