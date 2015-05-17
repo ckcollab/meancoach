@@ -27,7 +27,7 @@ class SeleniumTestCase(LiveServerTestCase):
     def get(self, url):
         return self.selenium.get('%s%s' % (self.live_server_url, url))
 
-    def circleci_screenshot(self):
+    def circleci_screenshot(self, name="screenshot.png"):
         circle_dir = os.environ.get('CIRCLE_ARTIFACTS')
         assert circle_dir, "Could not find CIRCLE_ARTIFACTS environment variable!"
-        self.selenium.get_screenshot_as_file(os.path.join(circle_dir, "screenshot.png"))
+        self.selenium.get_screenshot_as_file(os.path.join(circle_dir, name))
