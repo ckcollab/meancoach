@@ -25,6 +25,8 @@ class MetricRecordInputFunctionalTest(SeleniumTestCase):
         submit.click()
 
         self.get(reverse('metrics:input'))
+        import time
+        time.sleep(2)
 
     # Ensure we have production settings for this test so the js files are
     # minified (could cause problems not seen in dev)

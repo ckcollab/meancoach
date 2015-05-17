@@ -50,9 +50,6 @@ class Measurement(models.Model):
         # Boolean should default to 0, not 5!
         if self.pk is None and self.metric.boolean and not self.measurement:
             self.measurement = 0
-
-        print "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%", self.metric.monthly, self.when.day
-
         if self.metric.monthly and self.when.day != 1:
             raise ValueError("Cannot create a metric record not on the first day of the month!")
 
