@@ -11,12 +11,15 @@ from ..models import Metric, Measurement
 
 
 def metric_record_to_json(metric_record):
+    def uncapitalize_first_letter(s):
+        if s:
+            return s[:1].lower() + s[1:]
     return {
         "name": metric_record.metric.name,
         "metric_id": metric_record.pk,
         "measurement": metric_record.measurement,
-        "description_best": metric_record.metric.description_best,
-        "description_worst": metric_record.metric.description_worst,
+        "description_best": uncapitalize_first_letter(metric_record.metric.description_best),
+        "description_worst": uncapitalize_first_letter(metric_record.metric.description_worst),
         "notes": metric_record.notes,
     }
 
