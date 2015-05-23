@@ -8,8 +8,14 @@ from django.db import models
 class Metric(models.Model):
     creator = models.ForeignKey(User, related_name="metrics")
     name = models.CharField(max_length=100)
-    description_worst = models.TextField(help_text="eg for measuring Happiness: 'got beat up at school'", verbose_name="Description of the worst ever day of this metric")
-    description_best = models.TextField(help_text="eg for measuring Happiness: 'accomplished more than I imagined'", verbose_name="Description of your best ever day of this metric")
+    description_worst = models.TextField(
+        help_text="eg for measuring Happiness: 'got beat up at school'",
+        verbose_name="Description of the worst ever day of this metric"
+    )
+    description_best = models.TextField(
+        help_text="eg for measuring Happiness: 'accomplished more than I imagined'",
+        verbose_name="Description of your best ever day of this metric"
+    )
     daily = models.BooleanField(default=False, help_text="every day")
     monthly = models.BooleanField(default=False, help_text="every month")
     boolean = models.BooleanField(default=False, help_text="did or didn't (not a 0-10 measurement)")
