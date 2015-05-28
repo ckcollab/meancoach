@@ -37,6 +37,21 @@ class Command(BaseCommand):
                 "daily": True,
                 "boolean": True,
             },
+            {
+                "name": "Drank coffee",
+                "daily": True,
+                "boolean": True,
+            },
+            {
+                "name": "Worked out in the morning",
+                "daily": True,
+                "boolean": True,
+            },
+            {
+                "name": "Drank alcohol",
+                "daily": True,
+                "boolean": True,
+            },
             # Monthly
             {
                 "name": "Nature",

@@ -1,5 +1,3 @@
-import time
-
 from django.core.urlresolvers import reverse
 
 from .base import SeleniumTestCase
@@ -20,10 +18,12 @@ class MetricsFunctionalTests(SeleniumTestCase):
         metric_name.send_keys('Test Metric')
         daily = self.selenium.find_element_by_id("id_daily")
         daily.click()
+        description_worst = self.selenium.find_element_by_id('id_description_worst')
+        description_worst.send_keys("worst day ever")
+        description_best = self.selenium.find_element_by_id('id_description_best')
+        description_best.send_keys("best day ever")
         submit_and_add_another_button = self.selenium.find_element_by_name("_save_and_add_another")
         submit_and_add_another_button.click()
-
-        time.sleep(1)
         # Metric name should be cleared
         metric_name = self.selenium.find_element_by_id('id_name')
         assert metric_name.get_attribute('value') == ''

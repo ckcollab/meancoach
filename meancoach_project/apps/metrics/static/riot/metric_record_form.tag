@@ -103,7 +103,11 @@
         <div class="panel-body">
             <h3 show="{ opts.checklist && opts.checklist.length > 0 }">Checklist</h3>
 
-            <checklist each="{ opts.checklist }"></checklist>
+            <div class="control-group">
+                <div class="controls">
+                    <checklist each="{ opts.checklist }"></checklist>
+                </div>
+            </div>
 
             <measurement each="{ opts.metrics }">
             </measurement>
@@ -180,8 +184,8 @@
             </span>
             { this.name }
         </h3>
-        <small class="description_worst">{ this.description_worst }</small>
-        <small class="description_best">{ this.description_best }</small>
+        <small class="description_worst">1 being { this.description_worst }</small>
+        <small class="description_best">10 being { this.description_best }</small>
 
         <input type="range"
                id="id_measurement"
@@ -192,9 +196,9 @@
                onchange="{ this.on_form_value_changed('measurement') }">
         <textarea id="id_notes"
                   name="notes"
-                  oninput="{ this.on_form_value_changed('notes') }">
-            { this.notes }
-        </textarea>
+                  oninput="{ this.on_form_value_changed('notes') }"
+                  placeholder="notes"
+        >{ this.notes }</textarea>
     </div>
 
     /*
