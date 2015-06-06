@@ -19,7 +19,8 @@ test:
     - (cd meancoach_project && bower install)
     - (cd meancoach_project && python manage.py collectstatic --noinput)
   override:
-    - (cd meancoach_project && fab test)
+    - (cd meancoach_project && fab test_lint)
+    - (cd meancoach_project && py.test --cov .)
 
 #deployment:
 #  staging:
