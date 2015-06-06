@@ -1,6 +1,4 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-meancoach [![Test Coverage](https://codeclimate.com/github/dev-coop/meancoach/badges/coverage.svg)](https://codeclimate.com/github/dev-coop/meancoach/coverage) [![Code Climate](https://codeclimate.com/github/dev-coop/meancoach/badges/gpa.svg)](https://codeclimate.com/github/dev-coop/meancoach)
+meancoach [![Test Coverage](https://codeclimate.com/github/dev-coop/meancoach/badges/coverage.svg)](https://codeclimate.com/github/dev-coop/meancoach/coverage) [![Code Climate](https://codeclimate.com/github/dev-coop/meancoach/badges/gpa.svg)](https://codeclimate.com/github/dev-coop/meancoach) [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 =========
 
 1. `git clone https://github.com/dev-coop/meancoach.git`
