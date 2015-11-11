@@ -99,6 +99,14 @@ STATICFILES_FINDERS = (
 
 WSGI_APPLICATION = 'wsgi.application'
 
+# Default database, this file is .gitignored:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'sqlite_database',
+    }
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 

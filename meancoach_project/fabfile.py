@@ -5,7 +5,11 @@ from fabric.contrib import django
 
 sys.path.insert(0, ".")
 
-django.settings_module('settings.local')
+try:
+    from settings import local
+    django.settings_module('settings.local')
+except ImportError:
+    django.settings_module('settings.base')
 from django.conf import settings as django_settings
 
 
